@@ -1,12 +1,27 @@
 <p align="center">
-  <img src="demo.png" alt="智者 Skill — 与智者对话" width="780">
 </p>
 
-<h1 align="center">智者 Skill · Wise Sage</h1>
+<h1 align="center">智者 Skill · Sage Skill </h1>
 
 <p align="center">
   <b>其他 Skill 是"帮你做决策"——智者 Skill 是"让你自己想明白"。</b><br>
   不给你答案。而是教你如何思考。
+</p>
+<img width="1536" height="1024" alt="智者skill" src="https://github.com/user-attachments/assets/336ea3e5-9044-4214-8308-fbeb7e1788f8" />
+
+
+<p align="center">
+  <a href="README.zh-CN.md"><strong>简体中文（完整版）</strong></a> •
+  <a href="README.en.md">English</a> •
+  <a href="README.zh-TW.md">繁體中文</a> •
+  <a href="README.ja.md">日本語</a> •
+  <a href="README.ko.md">한국어</a> •
+  <a href="README.fr.md">Français</a> •
+  <a href="README.la.md">Latina</a>
+</p>
+
+<p align="center">
+  <sub>选择对应语言查看完整文档 · Choose a language for full documentation</sub>
 </p>
 
 ---
@@ -14,6 +29,10 @@
 **智者 Skill** 把历史上的智者——庄子、苏格拉底、孔子、尼采、王阳明、爱因斯坦、查理·芒格……——蒸馏为**可对话的思维训练伙伴**。
 
 不是聊天机器人（不给你答案）。不是语录搜索引擎（不背名言警句）。而是**苏格拉底式的思维陪练**：反问你的假设、暴露你的盲区、给你新的认知框架——然后让你自己找到答案。
+
+<img width="1024" height="1536" alt="HHSMUEuXEAAgr5j" src="https://github.com/user-attachments/assets/71227f92-0cf3-4b94-9f50-44f78f2c583b" />
+
+
 
 ### 四种模式
 
@@ -44,6 +63,14 @@
 3. **永远暴露边界**——每次回答都附带时代局限
 4. **不编造、不包装、不忽略**——不碰政治、不编造观点、不隐藏争议、信息不足不强行生成
 
+
+### 示意图
+
+
+  <img src="demo.png" alt="智者 Skill — 与智者对话" width="780">
+
+
+
 ### 安装
 
 ```bash
@@ -61,16 +88,4 @@ npx skills add Dreamfutura-Stephen/Sage-skill
 
 ---
 
-<p align="center">
-  <a href="README.zh-CN.md"><strong>简体中文（完整版）</strong></a> •
-  <a href="README.en.md">English</a> •
-  <a href="README.zh-TW.md">繁體中文</a> •
-  <a href="README.ja.md">日本語</a> •
-  <a href="README.ko.md">한국어</a> •
-  <a href="README.fr.md">Français</a> •
-  <a href="README.la.md">Latina</a>
-</p>
 
-<p align="center">
-  <sub>选择对应语言查看完整文档 · Choose a language for full documentation</sub>
-</p>
