@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智者 Skill — 与智者对话</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', 'Noto Serif SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: #080c14;
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; padding: 48px 20px;
+  }
+
+  .brand-top {
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: white; font-weight: 700;
+    font-family: 'Noto Serif SC', serif;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+  }
+  .brand-text {
+    display: flex; flex-direction: column;
+  }
+  .brand-title {
+    font-size: 18px; font-weight: 700; color: #e2e8f0;
+    letter-spacing: 0.5px;
+  }
+  .brand-subtitle {
+    font-size: 12px; color: #64748b; letter-spacing: 0.3px;
+  }
+
+  .container {
+    max-width: 780px; width: 100%;
+    background: #0f172a;
+    border-radius: 24px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 40px 100px rgba(0,0,0,0.6);
+    overflow: hidden;
+    position: relative;
+  }
+  .container::before {
+    content: '';
+    position: absolute; top: -120px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #0a0f1e 0%, #151030 50%, #0a0f1e 100%);
+    padding: 28px 36px 22px;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.10);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; top: -60px; right: -30px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute; bottom: -40px; left: -40px;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.04) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .header-top {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+    position: relative; z-index: 1;
+  }
+  .header-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: white;
+    box-shadow: 0 2px 12px rgba(99, 102, 241, 0.25);
+  }
+  .header h1 {
+    font-size: 18px; color: #f1f5f9; font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .header .badge {
+    font-size: 11px; padding: 3px 12px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+    color: #a5b4fc; border-radius: 12px;
+    font-weight: 600; margin-left: 8px;
+    border: 1px solid rgba(99, 102, 241, 0.15);
+  }
+  .header .subtitle {
+    font-size: 13px; color: #64748b; position: relative; z-index: 1;
+    font-weight: 400; letter-spacing: 0.2px;
+    line-height: 1.5;
+  }
+
+  .chat {
+    padding: 24px 36px 16px;
+    display: flex; flex-direction: column; gap: 20px;
+    background: #0f172a;
+    position: relative; z-index: 1;
+  }
+
+  .msg { display: flex; gap: 14px; align-items: flex-start; }
+  .msg.user { flex-direction: row-reverse; }
+
+  .avatar {
+    width: 44px; height: 44px; border-radius: 14px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    font-family: 'Noto Serif SC', serif;
+    position: relative;
+  }
+  .msg.sage .avatar {
+    background: linear-gradient(135deg, #312e81, #4338ca, #4f46e5);
+    color: #c7d2fe;
+  }
+  .msg.sage.confucius .avatar {
+    background: linear-gradient(135deg, #854d0e, #a16207, #ca8a04);
+    color: #fef3c7;
+  }
+  .msg.sage.socrates .avatar {
+    background: linear-gradient(135deg, #1e3a5f, #1e40af, #2563eb);
+    color: #bfdbfe;
+  }
+  .msg.user .avatar {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: #94a3b8;
+    font-size: 15px;
+  }
+
+  .bubble-wrapper { max-width: 80%; min-width: 100px; }
+
+  .sage-name {
+    font-size: 12px; font-weight: 600;
+    margin-bottom: 5px; margin-left: 3px;
+    letter-spacing: 0.3px;
+  }
+  .msg.sage .sage-name { color: #818cf8; }
+  .msg.sage.confucius .sage-name { color: #fbbf24; }
+  .msg.sage.socrates .sage-name { color: #60a5fa; }
+
+  .bubble {
+    padding: 14px 20px; border-radius: 18px;
+    font-size: 14px; line-height: 1.75;
+    letter-spacing: 0.2px;
+    position: relative;
+  }
+  .msg.sage .bubble {
+    background: linear-gradient(135deg, #1a1740 0%, #1e1b4b 100%);
+    color: #cbd5e1;
+    border-bottom-left-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    border: 1px solid rgba(99, 102, 241, 0.08);
+  }
+  .msg.sage.confucius .bubble {
+    background: linear-gradient(135deg, #1c1506 0%, #292009 100%);
+    border: 1px solid rgba(202, 138, 4, 0.12);
+  }
+  .msg.sage.socrates .bubble {
+    background: linear-gradient(135deg, #0f1d3a 0%, #132654 100%);
+    border: 1px solid rgba(37, 99, 235, 0.12);
+  }
+  .msg.user .bubble {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-bottom-right-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    border: 1px solid rgba(148, 163, 184, 0.06);
+  }
+
+  .book-ref {
+    color: #a5b4fc;
+    font-weight: 500;
+    font-style: italic;
+  }
+  .msg.sage.confucius .bubble .book-ref { color: #fcd34d; }
+  .msg.sage.socrates .bubble .book-ref { color: #93c5fd; }
+
+  .typing {
+    display: flex; gap: 5px; align-items: center;
+    padding: 4px 0;
+  }
+  .typing-dot {
+    width: 8px; height: 8px;
+    background: #6366f1; border-radius: 50%;
+    animation: typing 1.4s infinite;
+    opacity: 0.3;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing {
+    0%, 60%, 100% { opacity: 0.3; transform: scale(1); }
+    30% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 14px;
+    padding: 2px 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(99, 102, 241, 0.15), transparent); }
+  .divider-label { font-size: 11px; color: #475569; font-weight: 500; letter-spacing: 0.5px; }
+
+  .boundary-box {
+    margin: 4px 0 6px 56px;
+    padding: 12px 18px;
+    background: rgba(234, 179, 8, 0.04);
+    border: 1px solid rgba(234, 179, 8, 0.15);
+    border-radius: 10px;
+    font-size: 12px; color: #9ca3af;
+    line-height: 1.7; letter-spacing: 0.2px;
+  }
+  .boundary-box strong { color: #eab308; }
+
+  .input-bar {
+    padding: 16px 36px 24px;
+    display: flex; gap: 12px; align-items: center;
+    background: linear-gradient(to top, #0f172a, transparent);
+    position: relative; z-index: 1;
+  }
+  .input-field {
+    flex: 1; display: flex; align-items: center;
+    padding: 0 20px; height: 46px;
+    background: #0a0f1e;
+    border: 1px solid rgba(99, 102, 241, 0.10);
+    border-radius: 23px;
+    transition: all 0.2s;
+  }
+  .input-field:hover { border-color: rgba(99, 102, 241, 0.2); }
+  .input-field span {
+    color: #475569; font-size: 14px; letter-spacing: 0.2px;
+  }
+  .send-btn {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, #6366f1, #7c3aed);
+    border: none; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(99, 102, 241, 0.3);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .send-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+  }
+  .send-btn svg { width: 18px; height: 18px; }
+
+  .footer {
+    padding: 16px 36px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.03);
+  }
+  .footer span {
+    font-size: 11px; color: #334155; letter-spacing: 0.3px;
+  }
+  .footer .highlight {
+    color: #6366f1; font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-top">
+  <div class="brand-icon">智</div>
+  <div class="brand-text">
+    <span class="brand-title">智者 Skill</span>
+    <span class="brand-subtitle">Socratic Thinking Companion</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="header-top">
+      <div class="header-icon">🧠</div>
+      <h1>与智者对话</h1>
+      <span class="badge">四种模式</span>
+    </div>
+    <p class="subtitle">蒸馏历史上的智者，用苏格拉底式思维陪练——反问你的假设、暴露你的盲区、给你新的认知框架，然后让你自己找到答案。</p>
+  </div>
+
+  <div class="chat">
+
+    <!-- 1st user message -->
+    <div class="msg user">
+      <div class="avatar">🙋</div>
+      <div class="bubble-wrapper">
+        <div class="bubble">我总是在做决策时犹豫不决，害怕选错。有什么建议吗？</div>
+      </div>
+    </div>
+
+    <!-- Zhuangzi -->
+    <div class="msg sage">
+      <div class="avatar">庄</div>
+      <div class="bubble-wrapper">
+        <div class="sage-name">庄子</div>
+        <div class="bubble">你说"害怕选错"——在你看来，"错"和"对"是两件不同的事，还是同一件事的两个名字？<br><br>我在<span class="book-ref">《齐物论》</span>里讲过一个故事：有个养猴的人早上给猴子三升橡子、晚上给四升，猴子们大怒；他改成早上四升、晚上三升，猴子们就高兴了。你看，总数量没变——是猴子的"对错"在变。你的判断困在哪个框架里？</div>
+      </div>
+    </div>
+
+    <div class="boundary-box">
+      <strong>⚠️ 边界提醒</strong>：庄子生活在战国，他没经历过现代职场和KPI。他说的"齐物"不是让你躺平——而是超越二元对立的固化思维。请批判性地吸收。
+    </div>
+
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-label">切换智者</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- 2nd user -->
+    <div class="msg user">
+      <div class="avatar">🙋</div>
+      <div class="bubble-wrapper">
+        <div class="bubble">那孔子会怎么看待这个问题？我总担心自己能力不够。</div>
+      </div>
+    </div>
+
+    <!-- Confucius -->
+    <div class="msg sage confucius">
+      <div class="avatar">孔</div>
+      <div class="bubble-wrapper">
+        <div class="sage-name" style="color: #fbbf24;">孔子</div>
+        <div class="bubble">你说"能力不够"——我们先来正名一下。你所说的"能力不够"，是指"我不够"还是"我还没做"？<br><br><span class="book-ref">《述而》</span>有句话："我欲仁，斯仁至矣。"仁尚且可以由决定启动，何况其他事？你担心的不是能力——是你把"我不完美"和"我不行"混为一谈了。叩其两端：如果你一定不害怕地选下去，会怎样？如果你永远等到"够强"再选，又会怎样？两端的中间，你认为的答案是什么？</div>
+      </div>
+    </div>
+
+    <div class="boundary-box">
+      <strong>⚠️ 边界提醒</strong>：孔子生活在春秋末期，他没见过现代社会的选择焦虑和信息过载。"叩其两端"是为了帮你理清思路，而非在重大专业决策上取代你自己的判断。
+    </div>
+
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-label">切换智者</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- 3rd user -->
+    <div class="msg user">
+      <div class="avatar">🙋</div>
+      <div class="bubble-wrapper">
+        <div class="bubble">那你是说我不应该纠结对错？</div>
+      </div>
+    </div>
+
+    <!-- Socrates -->
+    <div class="msg sage socrates">
+      <div class="avatar">苏</div>
+      <div class="bubble-wrapper">
+        <div class="sage-name" style="color: #60a5fa;">苏格拉底</div>
+        <div class="bubble">我注意到，你在问我"应该不应该"——这说明你已经在寻找一个外部答案了。让我用另一个问题来回答你：<br><br>如果一个人害怕选错只是因为"不想被评判"，另一个人害怕选错是因为"想对结果负责"——你觉得这两个"害怕"是同一个东西吗？<br><br>认识你自己（<span class="book-ref">γνῶθι σεαυτόν</span>）。在问我"该怎么做"之前，先问问：你怕的究竟是"后果本身"，还是"别人眼里的后果"？</div>
+      </div>
+    </div>
+
+    <div class="boundary-box">
+      <strong>⚠️ 边界提醒</strong>：苏格拉底生活在公元前5世纪的雅典，他的问答法预设了对话者有思考自由和闲暇——在信息不对称或权力不对等的情况下，他的方法需要结合现代批判性思维使用。
+    </div>
+
+    <!-- Typing indicator -->
+    <div class="msg sage">
+      <div class="avatar" style="background: linear-gradient(135deg, #312e81, #4f46e5); opacity: 0.6;">…</div>
+      <div class="bubble-wrapper">
+        <div class="sage-name" style="color: #6366f1; opacity: 0.6;">智者正在思考</div>
+        <div class="typing">
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+          <div class="typing-dot"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="input-bar">
+    <div class="input-field">
+      <span>继续对话，或输入 /tw 邀请更多智者参与圆桌…</span>
+    </div>
+    <button class="send-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+
+  <div class="footer">
+    <span>其他 Skill 是 <span class="highlight">"帮你做决策"</span> —— 智者 Skill 是 <span class="highlight">"让你自己想明白"</span></span>
+  </div>
+
+</div>
+
+</body>
+</html>
